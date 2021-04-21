@@ -1,0 +1,64 @@
+type Query {
+  hello: String
+  viewer: User!
+}
+
+type Mutation {
+  createUser(name: String!, avatarUrl: String): UserMutationResponse!
+  updateUser(
+    userId: ID!
+    name: String
+    avatarUrl: String
+  ): UserMutationResponse!
+  addFriend(friendId: String!): UserMutationResponse!
+  removeFriend(friendId: String!): UserMutationResponse!
+  createRoom(name: String!, friendIds: [String!]!): RoomMutationResponse!
+  removeRoom(roomId: String!): RoomMutationResponse!
+  createChat(roomId: String!, message: String!): ChatMutationResponse!
+  removeChat(chatId: String!): ChatMutationResponse!
+}
+
+type User {
+  userId: ID!
+  name: String!
+  avatarUrl: String
+  friends: [User]!
+  rooms: [Room]!
+}
+
+type Room {
+  roomId: ID!
+  name: String!
+  users: [User!]!
+  chats: [Chat]!
+}
+
+type Chat {
+  chatId: ID!
+  userId: ID!
+  createdAt: String!
+  message: Striing!
+}
+
+interface MutationResponse {
+  success: Boolean!
+  message: String!
+}
+
+type UserMutationResponse implements MutationResponse {
+  success: Boolean!
+  message: String!
+  user: User
+}
+
+type RoomMutationResponse implements MutationResponse {
+  success: Boolean!
+  message: String!
+  room: Room
+}
+
+type ChatMutationResponse implements MutationResponse {
+  success: Boolean!
+  message: String!
+  chat: Chat
+}

@@ -1,0 +1,10 @@
+{
+  "type": "postgres",
+  "host": "postgresql",
+  "port": 5432,
+  "username": "root",
+  "password": "root",
+  "database": "chirp",
+  "entities": ["./src/entities/*.ts"],
+  "synchronize": true
+}
