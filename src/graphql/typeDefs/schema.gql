@@ -1,10 +1,8 @@
 type Query {
-  hello: String
   viewer: User!
 }
 
 type Mutation {
-  createUser(name: String!, avatarUrl: String): UserMutationResponse!
   updateUser(
     userId: ID!
     name: String
@@ -21,6 +19,7 @@ type Mutation {
 type User {
   userId: ID!
   name: String!
+  email: String!
   avatarUrl: String
   friends: [User]!
   rooms: [Room]!
@@ -37,7 +36,7 @@ type Chat {
   chatId: ID!
   userId: ID!
   createdAt: String!
-  message: Striing!
+  message: String!
 }
 
 interface MutationResponse {
