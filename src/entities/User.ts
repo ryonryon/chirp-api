@@ -5,6 +5,7 @@ import {
   OneToMany,
   ManyToMany,
   JoinTable,
+  PrimaryColumn,
 } from "typeorm";
 import Friend from "./Friend";
 import Room from "./Room";
@@ -14,8 +15,14 @@ export default class User {
   @PrimaryGeneratedColumn("uuid", { name: "user_id" })
   id!: string;
 
+  @Column()
+  token!: string;
+
   @Column({ name: "name" })
   name!: string;
+
+  @Column({ name: "email" })
+  email!: string;
 
   @Column({ name: "avatar_url" })
   avatarUrl?: string;
