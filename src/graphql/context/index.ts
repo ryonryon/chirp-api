@@ -11,5 +11,5 @@ export default async (request: FastifyRequest) => {
 };
 
 export interface Context {
-  user: User | null;
+  user: User;
 }

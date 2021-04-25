@@ -1,9 +1,9 @@
+import Mutation from "./Mutation";
 import Query from "./Query";
-import MutationResponse from "./MutationResponse";
 import User from "./User";
 
 export default {
+  Mutation,
   Query,
-  MutationResponse,
   User,
 };

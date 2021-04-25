@@ -5,7 +5,6 @@ import {
   OneToMany,
   ManyToMany,
   JoinTable,
-  PrimaryColumn,
 } from "typeorm";
 import Friend from "./Friend";
 import Room from "./Room";
@@ -13,9 +12,9 @@ import Room from "./Room";
 @Entity("users")
 export default class User {
   @PrimaryGeneratedColumn("uuid", { name: "user_id" })
-  id!: string;
+  readonly id!: UserId;
 
-  @Column()
+  @Column({ type: "text", unique: true })
   token!: string;
 
   @Column({ name: "name" })
@@ -34,3 +33,7 @@ export default class User {
   @JoinTable()
   rooms?: Room[];
 }
+
+export type UserId = string & {
+  _UserIdBrand: never;
+};

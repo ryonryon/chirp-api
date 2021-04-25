@@ -3,17 +3,13 @@ type Query {
 }
 
 type Mutation {
-  updateUser(
-    userId: ID!
-    name: String
-    avatarUrl: String
-  ): UserMutationResponse!
-  addFriend(friendId: String!): UserMutationResponse!
-  removeFriend(friendId: String!): UserMutationResponse!
-  createRoom(name: String!, friendIds: [String!]!): RoomMutationResponse!
-  removeRoom(roomId: String!): RoomMutationResponse!
-  createChat(roomId: String!, message: String!): ChatMutationResponse!
-  removeChat(chatId: String!): ChatMutationResponse!
+  updateUser(userId: ID!, name: String, avatarUrl: String): User!
+  addFriend(friendId: String!): User!
+  removeFriend(friendId: String!): Boolean!
+  createRoom(name: String!, friendIds: [String!]!): Room!
+  removeRoom(roomId: String!): Room!
+  createChat(roomId: String!, message: String!): Chat!
+  removeChat(chatId: String!): Chat!
 }
 
 type User {
@@ -37,27 +33,4 @@ type Chat {
   userId: ID!
   createdAt: String!
   message: String!
-}
-
-interface MutationResponse {
-  success: Boolean!
-  message: String!
-}
-
-type UserMutationResponse implements MutationResponse {
-  success: Boolean!
-  message: String!
-  user: User
-}
-
-type RoomMutationResponse implements MutationResponse {
-  success: Boolean!
-  message: String!
-  room: Room
-}
-
-type ChatMutationResponse implements MutationResponse {
-  success: Boolean!
-  message: String!
-  chat: Chat
 }

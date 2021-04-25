@@ -1,5 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, ManyToOne } from "typeorm";
-import User from "./User";
+import { Entity, PrimaryGeneratedColumn, ManyToOne, Column } from "typeorm";
+import User, { UserId } from "./User";
 
 @Entity("friends")
 export default class Friend {
@@ -7,5 +7,8 @@ export default class Friend {
   id!: string;
 
   @ManyToOne(() => User, (user) => user.friends, { cascade: true })
-  user!: User;
+  user!: User | UserId;
+
+  @Column({ name: "friend_user" })
+  friendUser!: UserId;
 }
