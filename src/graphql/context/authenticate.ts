@@ -1,7 +1,7 @@
-import { FastifyRequest } from "fastify";
+import { AuthenticationError } from "apollo-server-fastify";
 import * as admin from "firebase-admin";
-import User from "../../entities/User";
 import { getConnection } from "typeorm";
+import User from "../../entities/User";
 
 const firebaseAdmin = admin.initializeApp({
   credential: admin.credential.cert({
@@ -17,7 +17,7 @@ export default async ({ request }: any, context: any): Promise<any> => {
     !request.headers.authorization ||
     !request.headers.authorization.startsWith("Bearer ")
   )
-    return context;
+    throw new AuthenticationError("Authentication is required.");
 
   const token = request.headers.authorization.substring(7);
   let decodedToken: admin.auth.DecodedIdToken;
